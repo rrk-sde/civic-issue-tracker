@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CivicTracker AI - Intelligent Prompts Showcase</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+        :root {
+            --bg: #06050a;
+            --card-bg: #110e16;
+            --border: #2a2436;
+            --accent: #F59E0B;
+            /* Amber */
+            --accent-glow: rgba(245, 158, 11, 0.2);
+            --text: #FFFDF7;
+            --text-muted: #A89880;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+            line-height: 1.5;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin: 0;
+            background: linear-gradient(to right, #FFFDF7, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 12px;
+            font-weight: 500;
+        }
+
+        .prompt-card {
+            background: rgba(17, 14, 22, 0.7);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .prompt-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 50px var(--accent-glow);
+            border-color: var(--accent);
+        }
+
+        .card-header {
+            padding: 20px 30px;
+            background: #0d0b14;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            border-radius: 100px;
+            letter-spacing: 1px;
+        }
+
+        .badge-amber {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .badge-green {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .header-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .code-block {
+            padding: 30px;
+            background: #09080e;
+            margin: 0;
+            overflow-x: auto;
+        }
+
+        pre {
+            margin: 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #e2e8f0;
+            white-space: pre-wrap;
+        }
+
+        /* Syntax Highlighting Sim */
+        .kwd {
+            color: #f472b6;
+            font-weight: bold;
+        }
+
+        .var {
+            color: #38bdf8;
+            font-weight: bold;
+        }
+
+        .str {
+            color: #a5f3fc;
+        }
+
+        .punc {
+            color: #9ca3af;
+        }
+
+        .section {
+            color: var(--warning);
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>CivicTracker AI</h1>
+            <div class="subtitle">Agentic Workflow: System Prompts & Logic</div>
+        </header>
+
+        <!-- Prompt 1: Analysis -->
+        <div class="prompt-card">
+            <div class="card-header">
+                <span class="badge badge-amber">Agent 01</span>
+                <span class="header-title">civic_issue_analyzer.ts</span>
+            </div>
+            <div class="code-block">
+                <pre>You are an <span class="kwd">expert Civic Operations AI</span> specializing in analyzing citizen complaints for a municipal corporation. 
+Analyze the following citizen complaint to automatically categorize the issue, determine its urgency, and assign an appropriate SLA (Service Level Agreement).
+
+<span class="section">COMPLAINT TO ANALYZE:</span>
+Title: """<span class="var">${complaintTitle}</span>"""
+Description: """<span class="var">${complaintDescription}</span>"""
+
+<span class="section">INSTRUCTIONS:</span>
+Provide your analysis in the following <span class="kwd">JSON format ONLY</span>:
+{
+  "category": "<span class="str">Roads, Water Supply, Electricity, Sanitation, Stray Animals, etc.</span>",
+  "urgency": "<span class="str">Low, Medium, High, Critical</span>",
+  "recommendedSLA_Hours": <span class="var">&lt;number&gt;</span>,
+  "requiresFieldInspection": <span class="kwd">true/false</span>,
+  "assignedDepartment": "<span class="str">PWD, Jal Board, Sanitation Dept, etc.</span>",
+  "keyEntitiesExtracted": ["<span class="str">pothole</span>", "<span class="str">pipe burst</span>", "<span class="str">electric pole</span>"],
+  "explanation": "<span class="str">brief reasoning for SLA logic...</span>"
+}
+
+<span class="section">SLA HEURISTICS TO FOLLOW:</span>
+- Safety Hazards (Live wires, open manholes) = CRITICAL (4-12 hours SLA)
+- Essential Utilities (No drinking water, widespread power cut) = HIGH (24-48 hours SLA)
+- Maintenance (Potholes, broken streetlights) = MEDIUM (3-7 days SLA)
+- Nuisance/Cleaning (Garbage collection delays) = LOW (7-14 days SLA)</pre>
+            </div>
+        </div>
+
+        <!-- Prompt 2: Resolution Drafting -->
+        <div class="prompt-card">
+            <div class="card-header">
+                <span class="badge badge-green">Agent 02</span>
+                <span class="header-title">resolution_drafter.ts</span>
+            </div>
+            <div class="code-block">
+                <pre>Generate an <span class="kwd">official Resolution Summary</span> to be sent to the citizen via SMS/Email regarding their resolved complaint.
+
+<span class="section">COMPLAINT DETAILS:</span>
+- Tracking ID: <span class="var">${trackingId}</span>
+- Category: <span class="var">${category}</span>
+- Complaint Title: <span class="var">${complaintTitle}</span>
+- Time Taken: <span class="var">${timeElapsedHours} hours</span> (SLA was <span class="var">${slaLimit}</span>)
+- Officer Notes: """<span class="var">${officerInternalNotes}</span>"""
+
+<span class="section">OUTPUT FORMAT:</span>
+Draft a polite, professional message to the citizen. It should:
+1. <span class="str">Acknowledge</span> their tracking ID.
+2. <span class="str">Confirm completion</span> of the work.
+3. <span class="str">Summarize</span> what was actually done (translating officer jargon into plain language).
+4. <span class="str">Thank them</span> for being a proactive citizen.
+
+Keep it under <span class="kwd">300 characters</span> so it fits well within an SMS format.</pre>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

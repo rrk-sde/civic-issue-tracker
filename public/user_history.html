@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CivicTracker AI — Complete Prompt History</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        :root {
+            --bg: #06050a;
+            --card-bg: #110e16;
+            --timeline-line: #2a2436;
+            --accent: #F59E0B;
+            --accent-glow: rgba(245, 158, 11, 0.3);
+            --green: #22c55e;
+            --red: #ef4444;
+            --yellow: #eab308;
+            --purple: #a78bfa;
+            --text: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border: #2a2436;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Outfit', sans-serif;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFFDF7, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+
+        .header .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .header .badge {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 6px 16px;
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat .num {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat .label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .phase {
+            text-align: center;
+            margin: 40px 0 25px;
+            position: relative;
+        }
+
+        .phase::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--border), transparent);
+        }
+
+        .phase span {
+            position: relative;
+            background: var(--bg);
+            padding: 0 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 35px;
+            border-left: 2px solid var(--timeline-line);
+        }
+
+        .item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .dot {
+            position: absolute;
+            left: -42px;
+            top: 4px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 3px solid var(--bg);
+            box-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        .dot.blue {
+            background: #3b82f6;
+        }
+
+        .dot.green {
+            background: var(--green);
+        }
+
+        .dot.red {
+            background: var(--red);
+        }
+
+        .dot.yellow {
+            background: var(--yellow);
+        }
+
+        .dot.purple {
+            background: var(--purple);
+        }
+
+        .timestamp {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tag {
+            font-size: 0.65rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .tag-setup {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+        }
+
+        .tag-feature {
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+        }
+
+        .tag-ui {
+            background: rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
+        }
+
+        .tag-debug {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+        }
+
+        .tag-docs {
+            background: rgba(167, 139, 250, 0.2);
+            color: #a78bfa;
+        }
+
+        .content {
+            background: var(--card-bg);
+            padding: 18px 22px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: border-color 0.3s;
+        }
+
+        .prompt-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛡️ CivicTracker AI — Prompt History</h1>
+            <p class="subtitle">Complete development timeline from Vibe-A-Thon 2026</p>
+            <div class="badge">📅 Sunday, 22 Feb 2026 • 9:00 AM → 10:00 PM</div>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat">
+                <div class="num">69</div>
+                <div class="label">Filtered Prompts</div>
+            </div>
+            <div class="stat">
+                <div class="num">8+</div>
+                <div class="label">Hours</div>
+            </div>
+            <div class="stat">
+                <div class="num">100%</div>
+                <div class="label">AI Driven</div>
+            </div>
+        </div>
+
+        <div class="phase"><span>🚀 Vibe-A-Thon Implementation Timeline</span></div>
+        <div class="timeline">
+
+            <div class="item">
+                <div class="dot green"></div>
+                <span class="timestamp">Prompt #1 <span class="tag tag-ui">UI/UX</span></span>
+                <div class="content">
+                    <div class="prompt-text">Hello Team,
+
+                        Good Morning and welcome to Vibe-A-Thon 2026! 🎉
+
+                        The clock has officially started. You have until 10:00 PM today (Sunday, 22nd February 2026) to
+                        build, innovate, and vibe with AI.
+
+                        Today’s Challenge – Choose ONE Idea
+                        You may select any one of the following ideas and build a fully functional solution using
+                        AI-driven development (no manual coding).
+
+                        1️⃣ AI Dynamic Price Fairness Checker
+                        Build an AI tool that checks whether online prices are inflated or fairly valued.
+
+                        Users paste:
+                        • Amazon / Flipkart product listing
+                        • Hotel booking price
+                        • Flight fare details
+
+                        System analyzes and estimates:
+                        • Fair price range
+                        • Surge / dynamic pricing pattern
+                        • Historical price behavior (if available)
+                        • Suggested best time to buy
+                        • Confidence rating of analysis
+
+                        AI must handle:
+                        • Price reasoning logic
+                        • Heuristic-based valuation modeling
+                        • Surge detection patterns
+                        • Demand-based pricing signals
+                        • Confidence scoring
+
+                        ✅ MVP Expectations
+                        • Input field for product / hotel / flight details
+                        • Basic fair price estimation logic
+                        • Surge detection indicator
+                        • Buy now vs wait suggestion
+                        • Confidence score display
+                        • Result summary screen with price insight
+
+                        2️⃣ Farmer Profitability Estimator
+                        Build a decision-support tool that helps farmers estimate whether a crop choice will be
+                        profitable.
+
+                        Farmers input:
+                        • Crop type
+                        • Land size
+                        • District / Region
+                        • Irrigation type
+                        • Cost inputs (seeds, fertilizer, labor, transport, etc.)
+
+                        System estimates:
+                        • Expected yield (based on region data)
+                        • MSP / market price comparison
+                        • Total cost vs revenue
+                        • Net profit / loss projection
+                        • Key risk factors (weather, price fluctuation, irrigation dependency)
+
+                        System must handle:
+                        • Crop-wise yield calculation engine
+                        • Region-based variation logic
+                        • Cost modeling
+                        • Profitability computation
+                        • Risk scoring logic
+
+                        ✅ MVP Expectations
+                        • Crop + land + district input form
+                        • Basic yield estimation logic
+                        • MSP / price comparison
+                        • Profit calculation (Revenue – Cost)
+                        • Region-based variation support
+                        • Result summary screen with profit estimate
+
+                        3️⃣ Traffic Flow Optimization Simulator
+                        Build a simulation tool that models and optimizes urban traffic signal timing.
+
+                        Simulate inputs:
+                        • Vehicles per lane
+                        • Lane type (straight / turn)
+                        • Traffic density levels
+                        • Current signal timing cycle
+
+                        System performs:
+                        • Queue length modeling
+                        • Dynamic signal timing optimization
+                        • Congestion reduction estimation
+                        • Wait-time comparison (Before vs After)
+                        • Traffic load balancing across lanes
+
+                        System must handle:
+                        • Queue modeling logic
+                        • Timing optimization algorithm
+                        • Traffic flow simulation engine
+                        • Load balancing calculations
+
+                        ✅ MVP Expectations
+                        • Input configuration for vehicles per lane + signal timing
+                        • Basic traffic simulation model
+                        • Optimized timing output
+                        • Before vs After congestion metrics
+                        • Visual indicator of wait-time reduction
+                        • Simulation results stored for comparison
+                        4️⃣ Panchayat / Ward Civic Issue Tracker
+                        Build a digital complaint management system for Panchayat / Ward-level governance.
+
+                        Citizens can:
+                        • Submit complaints (title + description)
+                        • Upload photo proof
+                        • Geo-tag issue location
+                        • Track complaint status via unique ID
+
+                        Officials get a role-based dashboard to:
+                        • View ward-wise complaints
+                        • Assign to field staff
+                        • Update status (Open → In Progress → Resolved → Closed)
+                        • Monitor SLA timers
+                        • Handle escalations
+
+                        System includes:
+                        • Role-based access (Citizen / Officer / Admin)
+                        • Status workflow engine
+                        • SLA timer with breach detection
+                        • Auto-escalation to higher authority
+                        • Complaint lifecycle history storage
+
+                        ✅ MVP Expectations
+                        • Complaint submission with photo + geo-tag
+                        • Unique complaint ID + status tracking
+                        • Official dashboard with status update
+                        • Basic SLA timer + 1-level escalation
+                        • Role-based login
+                        • Complaint data stored in DB
+                        • Simple analytics (Total / Pending / Resolved)
+
+
+                        📌 Important Instructions
+                        Please complete all work before 10:00 PM today.
+
+                        You must submit:
+
+
+                        ✅ A 3–4 minute video walkthrough
+
+                        ✅ GitHub repository (with code, database schema, install steps)
+
+                        ✅ A Word document clearly documenting:
+
+                        Steps followed
+
+                        Prompts used
+
+                        Tools/agents used
+
+                        Development method
+
+                        ✅ (Optional) If deployed, share the live URL
+
+                        After completing everything, fill out the final submission form:
+
+                        👉 https://forms.office.com/r/fhfYpYGLuQ
+
+                        🛠 Development Guidelines
+
+                        Use Company UI Guidelines
+
+                        Follow Company Folder Structure
+
+                        You may build:
+
+                        Web App
+
+                        Mobile App
+
+                        Backend Tool
+
+                        Full Stack Application
+
+                        Any programming language or tech stack is allowed
+
+                        100% AI-assisted development (no manual coding)
+
+                        This is your chance to prove who the real Vibe Coder is.
+
+
+                        "C:\Users\AmritAnand(AppDBMod)\Downloads\D6FBD455-4007-4C66-889A-2CB9FF3E2024 (1).pdf"
+
+                        civic issue treacker looks good</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot yellow"></div>
+                <span class="timestamp">Prompt #2 <span class="tag tag-setup">SETUP</span></span>
+                <div class="content">
+                    <div class="prompt-text">continue also dont forrgot to follow folder structure i hv provided</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot purple"></div>
+                <span class="timestamp">Prompt #3 <span class="tag tag-docs">DOCS</span></span>
+                <div class="content">
+                    <div class="prompt-text">why json server use mern stack</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot blue"></div>
+                <span class="timestamp">Prompt #4 <span class="tag tag-feature">FEATURE</span></span>
+                <div class="content">
+                    <div class="prompt-text">kill node</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot green"></div>
+                <span class="timestamp">Prompt #5 <span class="tag tag-ui">UI/UX</span></span>
+                <div class="content">
+                    <div class="prompt-text">
+                        MONGODB_URI=mongodb+srv://rrk15ip1:rrk15ip1@cluster0.u2e4p1b.mongodb.net/civic-issue-tracker?appName=Cluster0
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot yellow"></div>
+                <span class="timestamp">Prompt #6 <span class="tag tag-setup">SETUP</span></span>
+                <div class="content">
+                    <div class="prompt-text">redesign ui</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot purple"></div>
+                <span class="timestamp">Prompt #7 <span class="tag tag-docs">DOCS</span></span>
+                <div class="content">
+                    <div class="prompt-text">better use next js
+                        C:\Users\AmritAnand(AppDBMod)\VIBEaThon\scam-shield
+                        take refrence of this</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot blue"></div>
+                <span class="timestamp">Prompt #8 <span class="tag tag-feature">FEATURE</span></span>
+                <div class="content">
+                    <div class="prompt-text">also no need backend nextjs is enough</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot green"></div>
+                <span class="timestamp">Prompt #9 <span class="tag tag-ui">UI/UX</span></span>
+                <div class="content">
+                    <div class="prompt-text">ui and all match with other 99% people made same ui and with same color
+                        theme do something unique creative best ux award winning</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot yellow"></div>
+                <span class="timestamp">Prompt #10 <span class="tag tag-setup">SETUP</span></span>
+                <div class="content">
+                    <div class="prompt-text">Panchayat / Ward Civic Issue Tracker
+                        Build a digital complaint management system for Panchayat / Ward-level governance.
+
+                        Citizens can:</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot purple"></div>
+                <span class="timestamp">Prompt #11 <span class="tag tag-docs">DOCS</span></span>
+                <div class="content">
+                    <div class="prompt-text">any thing else i can show up here so this page looks fuller</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot blue"></div>
+                <span class="timestamp">Prompt #12 <span class="tag tag-feature">FEATURE</span></span>
+                <div class="content">
+                    <div class="prompt-text">n14ZCuo74j8WbX3Quksb8nj-hpg
+
+
+                        Key Name
+                        Date Created
+                        API Key
+                        API Secret
+                        Status
+
+                        Untitled
+
+                        Feb 22, 2026
+                        868694434998647
+
+                        n14ZCuo74j8WbX3Quksb8nj-hpg
+
+
+                        Active</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot green"></div>
+                <span class="timestamp">Prompt #13 <span class="tag tag-ui">UI/UX</span></span>
+                <div class="content">
+                    <div class="prompt-text">also complains not shows here</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot yellow"></div>
+                <span class="timestamp">Prompt #14 <span class="tag tag-setup">SETUP</span></span>
+                <div class="content">
+                    <div class="prompt-text">select option ui can be improved</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot purple"></div>
+                <span class="timestamp">Prompt #15 <span class="tag tag-docs">DOCS</span></span>
+                <div class="content">
+                    <div class="prompt-text">options going under table why</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot blue"></div>
+                <span class="timestamp">Prompt #16 <span class="tag tag-feature">FEATURE</span></span>
+                <div class="content">
+                    <div class="prompt-text">in readable perespecive is these font is good</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot green"></div>
+                <span class="timestamp">Prompt #17 <span class="tag tag-ui">UI/UX</span></span>
+                <div class="content">
+                    <div class="prompt-text">dark/light mode</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot yellow"></div>
+                <span class="timestamp">Prompt #18 <span class="tag tag-setup">SETUP</span></span>
+                <div class="content">
+                    <div class="prompt-text">dont use dummy data</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot purple"></div>
+                <span class="timestamp">Prompt #19 <span class="tag tag-docs">DOCS</span></span>
+                <div class="content">
+                    <div class="prompt-text">fill something below ward status empty not looks good some good text
+                        inspirationa motionvation word or anything you like and better for ux</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot blue"></div>
+                <span class="timestamp">Prompt #20 <span class="tag tag-feature">FEATURE</span></span>
+                <div class="content">
+                    <div class="prompt-text">what more in ui can be improved?</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot green"></div>
+                <span class="timestamp">Prompt #21 <span class="tag tag-ui">UI/UX</span></span>
+                <div class="content">
+                    <div class="prompt-text">do it
+
+                        High Impact (Would impress judges)
+                        # Feature Why
+                        1 Complaint Detail Panel — Click a row in Dashboard to slide open a side panel showing photo,
+                        map location, full history timeline, SLA countdown Right now the dashboard is flat — there's no
+                        way to deep-dive a complaint without tracking it separately
+                        2 Toast Notifications — Show a popup when status changes, staff assigned, escalation happens
+                        Currently actions happen silently with just a refresh — no feedback
+                        3 Animated Counters — Stat numbers count up from 0 on page load Small touch that makes the
+                        dashboard feel alive
+                        4 Loading Skeletons — Pulse-animated placeholder cards while API data loads Right now it just
+                        shows "0" then snaps to real numbers</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot yellow"></div>
+                <span class="timestamp">Prompt #22 <span class="tag tag-setup">SETUP</span></span>
+                <div class="content">
+                    <div class="prompt-text">status not getting updated in select option</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot purple"></div>
+                <span class="timestamp">Prompt #23 <span class="tag tag-docs">DOCS</span></span>
+                <div class="content">
+                    <div class="prompt-text">for assigning staff i have to choose staff than i hv to click on staff icon
+                        is it good ux</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot blue"></div>
+                <span class="timestamp">Prompt #24 <span class="tag tag-feature">FEATURE</span></span>
+                <div class="content">
+                    <div class="prompt-text">continue</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot green"></div>
+                <span class="timestamp">Prompt #25 <span class="tag tag-ui">UI/UX</span></span>
+                <div class="content">
+                    <div class="prompt-text">dashbord text is not visible much</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot yellow"></div>
+                <span class="timestamp">Prompt #26 <span class="tag tag-setup">SETUP</span></span>
+                <div class="content">
+                    <div class="prompt-text">Medium Impact (Polish)
+                        # Feature Why
+                        5 Success Confetti/Animation — After complaint submission, a celebratory micro-animation Makes
+                        the citizen experience feel satisfying
+                        6 Footer — Copyright, links, tech stack badges Pages just end abruptly
+                        7 Mobile Responsive — The bento grid breaks on small screens If a judge opens on phone/tablet it
+                        looks broken</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot purple"></div>
+                <span class="timestamp">Prompt #27 <span class="tag tag-docs">DOCS</span></span>
+                <div class="content">
+                    <div class="prompt-text">stillnot responsive</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot blue"></div>
+                <span class="timestamp">Prompt #28 <span class="tag tag-feature">FEATURE</span></span>
+                <div class="content">
+                    <div class="prompt-text">in mobile track or report input section should be just after attached img
+
+                        or tracking or reprt bbtn scroll to that section</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot green"></div>
+                <span class="timestamp">Prompt #29 <span class="tag tag-ui">UI/UX</span></span>
+                <div class="content">
+                    <div class="prompt-text">scrollintoview hide some part it should scroll little less elese it is
+                        going under header</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot yellow"></div>
+                <span class="timestamp">Prompt #30 <span class="tag tag-setup">SETUP</span></span>
+                <div class="content">
+                    <div class="prompt-text">fix for report issue</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot purple"></div>
+                <span class="timestamp">Prompt #31 <span class="tag tag-docs">DOCS</span></span>
+                <div class="content">
+                    <div class="prompt-text">is really issue is getting tracked in real time?</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot blue"></div>
+                <span class="timestamp">Prompt #32 <span class="tag tag-feature">FEATURE</span></span>
+                <div class="content">
+                    <div class="prompt-text">Stretch Goals
+                        # Feature Why
+                        8 Map View — Plot complaints on a Leaflet/OpenStreetMap using stored lat/lng Geo-tagging exists
+                        but isn't visualized
+                        9 Analytics Charts — Bar/pie charts for ward-wise breakdown, status distribution The analytics
+                        API exists but is only shown as numbers</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot green"></div>
+                <span class="timestamp">Prompt #33 <span class="tag tag-ui">UI/UX</span></span>
+                <div class="content">
+                    <div class="prompt-text">in issue heatmap what is showing?</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot yellow"></div>
+                <span class="timestamp">Prompt #34 <span class="tag tag-setup">SETUP</span></span>
+                <div class="content">
+                    <div class="prompt-text">complain table shows in last i think this is not good ux</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot purple"></div>
+                <span class="timestamp">Prompt #35 <span class="tag tag-docs">DOCS</span></span>
+                <div class="content">
+                    <div class="prompt-text">loader when geo tagging</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot blue"></div>
+                <span class="timestamp">Prompt #36 <span class="tag tag-feature">FEATURE</span></span>
+                <div class="content">
+                    <div class="prompt-text">this not looks good</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot green"></div>
+                <span class="timestamp">Prompt #37 <span class="tag tag-ui">UI/UX</span></span>
+                <div class="content">
+                    <div class="prompt-text">also bg and text and all color should match the project theme</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot yellow"></div>
+                <span class="timestamp">Prompt #38 <span class="tag tag-setup">SETUP</span></span>
+                <div class="content">
+                    <div class="prompt-text">on map rote is not clearly visible also it s theme should change on toggle
+                        of dark/light mode</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot purple"></div>
+                <span class="timestamp">Prompt #39 <span class="tag tag-docs">DOCS</span></span>
+                <div class="content">
+                    <div class="prompt-text">when my mouse on map when zoom using scrollpad its should zoom fleetmap
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot blue"></div>
+                <span class="timestamp">Prompt #40 <span class="tag tag-feature">FEATURE</span></span>
+                <div class="content">
+                    <div class="prompt-text">Cannot read properties of undefined (reading 'appendChild')</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot green"></div>
+                <span class="timestamp">Prompt #41 <span class="tag tag-ui">UI/UX</span></span>
+                <div class="content">
+                    <div class="prompt-text">place issue heatmap at another place</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot yellow"></div>
+                <span class="timestamp">Prompt #42 <span class="tag tag-setup">SETUP</span></span>
+                <div class="content">
+                    <div class="prompt-text">recenter button in heatmap</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot purple"></div>
+                <span class="timestamp">Prompt #43 <span class="tag tag-docs">DOCS</span></span>
+                <div class="content">
+                    <div class="prompt-text">what more feature can make more</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot blue"></div>
+                <span class="timestamp">Prompt #44 <span class="tag tag-feature">FEATURE</span></span>
+                <div class="content">
+                    <div class="prompt-text">make these works</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot green"></div>
+                <span class="timestamp">Prompt #45 <span class="tag tag-ui">UI/UX</span></span>
+                <div class="content">
+                    <div class="prompt-text">C:\Users\AmritAnand(AppDBMod)\gov-scheme-helper-ai
+
+                        take reference from above and do below task
+
+                        AI Issue Auto-Categorization (Smart Assistant)
+                        Instead of forcing citizens to pick categories or type long descriptions, we could integrate an
+                        AI model (like Gemini). When a user uploads a photo of a pothole, the AI automatically detects
+                        what the issue is, writes a suggested description, and automatically assigns a severity level
+                        (Low, Medium, High Priority) for the officers.</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot yellow"></div>
+                <span class="timestamp">Prompt #46 <span class="tag tag-setup">SETUP</span></span>
+                <div class="content">
+                    <div class="prompt-text">continue</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot purple"></div>
+                <span class="timestamp">Prompt #47 <span class="tag tag-docs">DOCS</span></span>
+                <div class="content">
+                    <div class="prompt-text">location should be mandotory to fill</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot blue"></div>
+                <span class="timestamp">Prompt #48 <span class="tag tag-feature">FEATURE</span></span>
+                <div class="content">
+                    <div class="prompt-text">there should be identification too description title and all which ever
+                        filled</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot green"></div>
+                <span class="timestamp">Prompt #49 <span class="tag tag-ui">UI/UX</span></span>
+                <div class="content">
+                    <div class="prompt-text">why category is unspecified</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot yellow"></div>
+                <span class="timestamp">Prompt #50 <span class="tag tag-setup">SETUP</span></span>
+                <div class="content">
+                    <div class="prompt-text">better first should be photo proof</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot purple"></div>
+                <span class="timestamp">Prompt #51 <span class="tag tag-docs">DOCS</span></span>
+                <div class="content">
+                    <div class="prompt-text">when i reload my website first darkmode come than its light mode</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot blue"></div>
+                <span class="timestamp">Prompt #52 <span class="tag tag-feature">FEATURE</span></span>
+                <div class="content">
+                    <div class="prompt-text">now coming white than dark than white</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot green"></div>
+                <span class="timestamp">Prompt #53 <span class="tag tag-ui">UI/UX</span></span>
+                <div class="content">
+                    <div class="prompt-text">SOME THIS LIKE AI BORDER so user will know befor uploading if its ai based
+                        phot upload and identification</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot yellow"></div>
+                <span class="timestamp">Prompt #54 <span class="tag tag-setup">SETUP</span></span>
+                <div class="content">
+                    <div class="prompt-text">for dark mode refreshing white theme not comes but when light mode in
+                        between dark mode comes when refresh</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot purple"></div>
+                <span class="timestamp">Prompt #55 <span class="tag tag-docs">DOCS</span></span>
+                <div class="content">
+                    <div class="prompt-text">still same for light mode</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot blue"></div>
+                <span class="timestamp">Prompt #56 <span class="tag tag-feature">FEATURE</span></span>
+                <div class="content">
+                    <div class="prompt-text">git@github.com:rrk-sde/civic-issue-tracker.git
+
+                        commit and push</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot green"></div>
+                <span class="timestamp">Prompt #57 <span class="tag tag-ui">UI/UX</span></span>
+                <div class="content">
+                    <div class="prompt-text">use ssh key</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot yellow"></div>
+                <span class="timestamp">Prompt #58 <span class="tag tag-setup">SETUP</span></span>
+                <div class="content">
+                    <div class="prompt-text">my mail rajeevrk9901@gmail.com</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot purple"></div>
+                <span class="timestamp">Prompt #59 <span class="tag tag-docs">DOCS</span></span>
+                <div class="content">
+                    <div class="prompt-text">fix build errors</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot blue"></div>
+                <span class="timestamp">Prompt #60 <span class="tag tag-feature">FEATURE</span></span>
+                <div class="content">
+                    <div class="prompt-text">https://nextjs.org/docs/messages/prerender-error</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot green"></div>
+                <span class="timestamp">Prompt #61 <span class="tag tag-ui">UI/UX</span></span>
+                <div class="content">
+                    <div class="prompt-text">use next 16 only and resolve the issue</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot yellow"></div>
+                <span class="timestamp">Prompt #62 <span class="tag tag-setup">SETUP</span></span>
+                <div class="content">
+                    <div class="prompt-text">continue fixing</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot purple"></div>
+                <span class="timestamp">Prompt #63 <span class="tag tag-docs">DOCS</span></span>
+                <div class="content">
+                    <div class="prompt-text">use nextjs 16 in this project also fix any build issue</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot blue"></div>
+                <span class="timestamp">Prompt #64 <span class="tag tag-feature">FEATURE</span></span>
+                <div class="content">
+                    <div class="prompt-text">
+                        https://stackoverflow.com/questions/74322410/how-to-fix-cannot-read-properties-of-null-reading-usecontext
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot green"></div>
+                <span class="timestamp">Prompt #65 <span class="tag tag-ui">UI/UX</span></span>
+                <div class="content">
+                    <div class="prompt-text">
+                        https://stackoverflow.com/questions/74322410/how-to-fix-cannot-read-properties-of-null-reading-usecontext
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot yellow"></div>
+                <span class="timestamp">Prompt #66 <span class="tag tag-setup">SETUP</span></span>
+                <div class="content">
+                    <div class="prompt-text">i want frontend folder filese directletly in root</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot purple"></div>
+                <span class="timestamp">Prompt #67 <span class="tag tag-docs">DOCS</span></span>
+                <div class="content">
+                    <div class="prompt-text">now commit and push</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot blue"></div>
+                <span class="timestamp">Prompt #68 <span class="tag tag-feature">FEATURE</span></span>
+                <div class="content">
+                    <div class="prompt-text">whatever prompt i gave to you from start make a htm file of prompt showing
+                        history time date</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="dot green"></div>
+                <span class="timestamp">Prompt #69 <span class="tag tag-ui">UI/UX</span></span>
+                <div class="content">
+                    <div class="prompt-text">i want all from 9am</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            <p><strong>CivicTracker AI</strong> — Built at Vibe-A-Thon 2026</p>
+            <p style="margin-top: 6px;">100% AI-Assisted Development • Rajeev Ranjan Kumar</p>
+            <p style="margin-top: 6px; font-size: 0.75rem;">(Terminal command logs, build errors, and tool trace logs
+                automatically hidden)</p>
+        </div>
+    </div>
+</body>
+
+</html>

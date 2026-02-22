@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt History - Civic Issue Tracker</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0d0b14;
+            color: #FFFDF7;
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            border-bottom: 2px solid #F59E0B;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            color: #F59E0B;
+        }
+        .prompt-card {
+            background-color: #1a1523;
+            border: 1px solid #332b45;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            page-break-inside: avoid;
+        }
+        .meta-info {
+            font-size: 0.85em;
+            color: #A89880;
+            margin-bottom: 12px;
+            font-family: monospace;
+            border-bottom: 1px solid #332b45;
+            padding-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .prompt-text {
+            font-size: 1.05em;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Filtered Prompt History</h1>
+        <p style="color: #A89880; margin-top: -20px; margin-bottom: 30px;">(Terminal logs, stack traces, and build errors have been excluded)</p>
+        
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 1</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">Hello Team,
+
+Good Morning and welcome to Vibe-A-Thon 2026! 🎉
+
+The clock has officially started. You have until 10:00 PM today (Sunday, 22nd February 2026) to build, innovate, and vibe with AI.
+
+Today’s Challenge – Choose ONE Idea
+You may select any one of the following ideas and build a fully functional solution using AI-driven development (no manual coding).
+
+1️⃣ AI Dynamic Price Fairness Checker
+Build an AI tool that checks whether online prices are inflated or fairly valued.
+
+Users paste:
+• Amazon / Flipkart product listing
+• Hotel booking price
+• Flight fare details
+
+System analyzes and estimates:
+• Fair price range
+• Surge / dynamic pricing pattern
+• Historical price behavior (if available)
+• Suggested best time to buy
+• Confidence rating of analysis
+
+AI must handle:
+• Price reasoning logic
+• Heuristic-based valuation modeling
+• Surge detection patterns
+• Demand-based pricing signals
+• Confidence scoring
+
+✅ MVP Expectations
+• Input field for product / hotel / flight details
+• Basic fair price estimation logic
+• Surge detection indicator
+• Buy now vs wait suggestion
+• Confidence score display
+• Result summary screen with price insight
+
+2️⃣ Farmer Profitability Estimator
+Build a decision-support tool that helps farmers estimate whether a crop choice will be profitable.
+
+Farmers input:
+• Crop type
+• Land size
+• District / Region
+• Irrigation type
+• Cost inputs (seeds, fertilizer, labor, transport, etc.)
+
+System estimates:
+• Expected yield (based on region data)
+• MSP / market price comparison
+• Total cost vs revenue
+• Net profit / loss projection
+• Key risk factors (weather, price fluctuation, irrigation dependency)
+
+System must handle:
+• Crop-wise yield calculation engine
+• Region-based variation logic
+• Cost modeling
+• Profitability computation
+• Risk scoring logic
+
+✅ MVP Expectations
+• Crop + land + district input form
+• Basic yield estimation logic
+• MSP / price comparison
+• Profit calculation (Revenue – Cost)
+• Region-based variation support
+• Result summary screen with profit estimate
+
+3️⃣ Traffic Flow Optimization Simulator
+Build a simulation tool that models and optimizes urban traffic signal timing.
+
+Simulate inputs:
+• Vehicles per lane
+• Lane type (straight / turn)
+• Traffic density levels
+• Current signal timing cycle
+
+System performs:
+• Queue length modeling
+• Dynamic signal timing optimization
+• Congestion reduction estimation
+• Wait-time comparison (Before vs After)
+• Traffic load balancing across lanes
+
+System must handle:
+• Queue modeling logic
+• Timing optimization algorithm
+• Traffic flow simulation engine
+• Load balancing calculations
+
+✅ MVP Expectations
+• Input configuration for vehicles per lane + signal timing
+• Basic traffic simulation model
+• Optimized timing output
+• Before vs After congestion metrics
+• Visual indicator of wait-time reduction
+• Simulation results stored for comparison
+4️⃣ Panchayat / Ward Civic Issue Tracker 
+Build a digital complaint management system for Panchayat / Ward-level governance.
+
+Citizens can:
+• Submit complaints (title + description)
+• Upload photo proof
+• Geo-tag issue location
+• Track complaint status via unique ID
+
+Officials get a role-based dashboard to:
+• View ward-wise complaints
+• Assign to field staff
+• Update status (Open → In Progress → Resolved → Closed)
+• Monitor SLA timers
+• Handle escalations
+
+System includes:
+• Role-based access (Citizen / Officer / Admin)
+• Status workflow engine
+• SLA timer with breach detection
+• Auto-escalation to higher authority
+• Complaint lifecycle history storage
+
+✅ MVP Expectations
+• Complaint submission with photo + geo-tag
+• Unique complaint ID + status tracking
+• Official dashboard with status update
+• Basic SLA timer + 1-level escalation
+• Role-based login
+• Complaint data stored in DB
+• Simple analytics (Total / Pending / Resolved)
+
+
+📌 Important Instructions
+Please complete all work before 10:00 PM today.
+
+You must submit:
+
+
+✅ A 3–4 minute video walkthrough
+
+✅ GitHub repository (with code, database schema, install steps)
+
+✅ A Word document clearly documenting:
+
+Steps followed
+
+Prompts used
+
+Tools/agents used
+
+Development method
+
+✅ (Optional) If deployed, share the live URL
+
+After completing everything, fill out the final submission form:
+
+👉 https://forms.office.com/r/fhfYpYGLuQ
+
+🛠 Development Guidelines
+
+Use Company UI Guidelines
+
+Follow Company Folder Structure
+
+You may build:
+
+Web App
+
+Mobile App
+
+Backend Tool
+
+Full Stack Application
+
+Any programming language or tech stack is allowed
+
+100% AI-assisted development (no manual coding)
+
+This is your chance to prove who the real Vibe Coder is.
+
+
+"C:\Users\AmritAnand(AppDBMod)\Downloads\D6FBD455-4007-4C66-889A-2CB9FF3E2024 (1).pdf"
+
+civic issue treacker looks good</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 2</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">continue also dont forrgot to follow folder structure i hv provided</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 3</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">why json server use mern stack</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 4</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">kill node</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 5</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">MONGODB_URI=mongodb+srv://rrk15ip1:rrk15ip1@cluster0.u2e4p1b.mongodb.net/civic-issue-tracker?appName=Cluster0</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 6</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">redesign ui</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 7</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">better use next js 
+C:\Users\AmritAnand(AppDBMod)\VIBEaThon\scam-shield
+take refrence of this</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 8</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">also no need backend nextjs is enough</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 9</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">ui and all match with other 99% people made same ui and with same color theme do something unique creative best ux award winning</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 10</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">Panchayat / Ward Civic Issue Tracker 
+Build a digital complaint management system for Panchayat / Ward-level governance.
+
+Citizens can:</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 11</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">any thing else i can show up here so this page looks fuller</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 12</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">n14ZCuo74j8WbX3Quksb8nj-hpg
+
+	
+Key Name
+Date Created
+API Key
+API Secret
+Status
+ 
+Untitled
+
+Feb 22, 2026
+868694434998647
+
+n14ZCuo74j8WbX3Quksb8nj-hpg
+
+
+Active</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 13</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">also complains not shows here</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 14</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">select option ui can be improved</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 15</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">options going under table why</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 16</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">in readable perespecive is these font is good</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 17</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">dark/light mode</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 18</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">dont use dummy data</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 19</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">fill something below ward status empty not looks good some good text inspirationa motionvation word or anything you like and better for ux</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 20</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">what more in ui can be improved?</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 21</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">do it
+
+ High Impact (Would impress judges)
+#	Feature	Why
+1	Complaint Detail Panel — Click a row in Dashboard to slide open a side panel showing photo, map location, full history timeline, SLA countdown	Right now the dashboard is flat — there's no way to deep-dive a complaint without tracking it separately
+2	Toast Notifications — Show a popup when status changes, staff assigned, escalation happens	Currently actions happen silently with just a refresh — no feedback
+3	Animated Counters — Stat numbers count up from 0 on page load	Small touch that makes the dashboard feel alive
+4	Loading Skeletons — Pulse-animated placeholder cards while API data loads	Right now it just shows "0" then snaps to real numbers</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 22</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">status not getting updated in select option</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 23</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">for assigning staff i have to choose staff than i hv to click on staff icon is it good ux</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 24</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">continue</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 25</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">dashbord text is not visible much</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 26</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">Medium Impact (Polish)
+#	Feature	Why
+5	Success Confetti/Animation — After complaint submission, a celebratory micro-animation	Makes the citizen experience feel satisfying
+6	Footer — Copyright, links, tech stack badges	Pages just end abruptly
+7	Mobile Responsive — The bento grid breaks on small screens	If a judge opens on phone/tablet it looks broken</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 27</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">stillnot responsive</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 28</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">in mobile track or report input section should be just after attached img
+
+or tracking or reprt bbtn scroll to that section</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 29</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">scrollintoview hide some part it should scroll little less elese it is going under header</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 30</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">fix for report issue</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 31</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">is really issue is getting tracked in real time?</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 32</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">Stretch Goals
+#	Feature	Why
+8	Map View — Plot complaints on a Leaflet/OpenStreetMap using stored lat/lng	Geo-tagging exists but isn't visualized
+9	Analytics Charts — Bar/pie charts for ward-wise breakdown, status distribution	The analytics API exists but is only shown as numbers</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 33</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">in issue heatmap what is showing?</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 34</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">complain table shows in last i think this is not good ux</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 35</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">loader when geo tagging</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 36</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">this not looks good</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 37</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">also bg and text and all color should match the project theme</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 38</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">on map rote is not clearly visible also it s theme should change on toggle of dark/light mode</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 39</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">when my mouse on map when zoom using scrollpad its should zoom fleetmap</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 40</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">Cannot read properties of undefined (reading 'appendChild')</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 41</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">place issue heatmap at another place</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 42</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">recenter button in heatmap</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 43</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">what more feature can make more</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 44</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">make these works</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 45</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">C:\Users\AmritAnand(AppDBMod)\gov-scheme-helper-ai
+
+take reference from above and do below task
+
+AI Issue Auto-Categorization (Smart Assistant)
+Instead of forcing citizens to pick categories or type long descriptions, we could integrate an AI model (like Gemini). When a user uploads a photo of a pothole, the AI automatically detects what the issue is, writes a suggested description, and automatically assigns a severity level (Low, Medium, High Priority) for the officers.</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 46</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">continue</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 47</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">location should be mandotory to fill</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 48</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">there should be identification too description title and all which ever filled</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 49</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">why category is unspecified</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 50</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">better first should be photo proof</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 51</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">when i reload my website first darkmode come than its light mode</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 52</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">now coming white than dark than white</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 53</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">SOME THIS LIKE AI BORDER so user will know befor uploading if its ai based phot upload and identification</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 54</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">for dark mode refreshing white theme not comes but when light mode in between dark mode comes when refresh</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 55</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">still same for light mode</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 56</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">git@github.com:rrk-sde/civic-issue-tracker.git
+
+commit and push</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 57</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">use ssh key</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 58</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">my mail rajeevrk9901@gmail.com</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 59</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">fix build errors</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 60</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">https://nextjs.org/docs/messages/prerender-error</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 61</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">use next 16 only and resolve the issue</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 62</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">continue fixing</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 63</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">use nextjs 16 in this project also fix any build issue</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 64</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">https://stackoverflow.com/questions/74322410/how-to-fix-cannot-read-properties-of-null-reading-usecontext</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 65</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">https://stackoverflow.com/questions/74322410/how-to-fix-cannot-read-properties-of-null-reading-usecontext</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 66</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">i want frontend folder filese directletly in root</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 67</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">now commit and push</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 68</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">whatever prompt i gave to you from start make a htm file of prompt showing history time date</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="meta-info">
+                <span>Request 69</span>
+                <span>From prmopt_civic_issue.md</span>
+            </div>
+            <div class="prompt-text">i want all from 9am</div>
+        </div>
+
+    </div>
+</body>
+</html>
