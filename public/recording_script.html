@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎬 CivicTracker AI — Comprehensive Walkthrough Script</title>
+    <title>🎬 CivicTracker AI — A to Z Comprehensive Walkthrough</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap');
 
@@ -16,6 +16,7 @@
             --accent-glow: rgba(245, 158, 11, 0.15);
             --green: #22c55e;
             --purple: #a78bfa;
+            --blue: #3b82f6;
             --text: #f1f5f9;
             --text-muted: #94a3b8;
             --text-dim: #64748b;
@@ -36,7 +37,7 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 960px;
             margin: 0 auto;
         }
 
@@ -53,7 +54,7 @@
 
         .header h1 {
             font-family: 'Outfit', sans-serif;
-            font-size: 2.8rem;
+            font-size: 3rem;
             font-weight: 800;
             background: linear-gradient(135deg, #FFFDF7, #F59E0B);
             -webkit-background-clip: text;
@@ -78,7 +79,7 @@
         /* Highlight box for "Above & Beyond" features */
         .beyond-box {
             margin: 0 0 40px;
-            padding: 25px 30px;
+            padding: 30px;
             background: rgba(34, 197, 94, 0.05);
             border: 1px dashed rgba(34, 197, 94, 0.4);
             border-radius: 16px;
@@ -86,13 +87,11 @@
 
         .beyond-title {
             font-family: 'Outfit', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--green);
             margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            text-align: center;
         }
 
         .beyond-list {
@@ -101,7 +100,7 @@
             color: #e2e8f0;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            gap: 20px;
         }
 
         @media (max-width: 768px) {
@@ -112,20 +111,28 @@
 
         .beyond-list li {
             position: relative;
-            padding-left: 28px;
+            padding-left: 32px;
             line-height: 1.5;
+            background: rgba(255, 255, 255, 0.02);
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .beyond-list li::before {
             content: '🚀';
             position: absolute;
-            left: 0;
-            top: 2px;
-            font-size: 0.85rem;
+            left: 10px;
+            top: 15px;
+            font-size: 1.1rem;
         }
 
         .beyond-list strong {
             color: #fcd34d;
+            display: block;
+            margin-bottom: 4px;
+            font-size: 1.05rem;
         }
 
         /* ===== STEP CARD ===== */
@@ -153,8 +160,8 @@
 
         .step-head {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 15px;
             margin-bottom: 20px;
         }
 
@@ -183,22 +190,30 @@
             color: var(--purple);
             font-weight: 600;
             font-family: 'JetBrains Mono', monospace;
+            width: 100%;
         }
 
         .narration {
             padding: 20px 25px;
             background: rgba(255, 255, 255, 0.02);
             border-radius: 12px;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             color: #f8fafc;
             line-height: 1.8;
             font-weight: 400;
             letter-spacing: 0.2px;
+            border-left: 3px solid var(--blue);
         }
 
         .narration strong {
-            color: #fcd34d;
+            color: #60a5fa;
             font-weight: 700;
+        }
+
+        .narration em {
+            color: #fcd34d;
+            font-style: normal;
+            font-weight: 600;
         }
 
         .tip {
@@ -206,6 +221,7 @@
             font-size: 0.85rem;
             color: var(--text-muted);
             font-style: italic;
+            text-align: right;
         }
     </style>
 </head>
@@ -217,142 +233,141 @@
         <div class="header">
             <div class="icon">🎙️</div>
             <h1>CivicTracker AI Director's Cut</h1>
-            <p style="color: var(--text-muted); font-size: 1.1rem;">The ultimate, uncompromising walkthrough script for
+            <p style="color: var(--text-muted); font-size: 1.1rem;">A-Z Feature Coverage Walkthrough Script for
                 Vibe-A-Thon 2026</p>
-            <div class="badge">Take your time. Show every feature. Blow them away.</div>
+            <div class="badge">Do not skip any feature! Take your time to blow the judges away.</div>
         </div>
 
         <div class="beyond-box">
-            <div class="beyond-title">🔥 CORE ARCHITECTURE TO HIGHLIGHT 🔥</div>
+            <div class="beyond-title">🔥 A-Z CORE TECH STACK (MENTION THESE!) 🔥</div>
             <ul class="beyond-list">
-                <li><strong>Next.js 16 App Router:</strong> Full-stack, lightning-fast SSR performance.</li>
-                <li><strong>Gemini Vision AI Engine:</strong> Analyzes raw image pixels to intelligently draft
-                    complaints, auto-fill tags, and deduce severity!</li>
-                <li><strong>Native Geolocation API:</strong> Pinpoints exact latitude & longitude automatically on
-                    submission.</li>
-                <li><strong>Cloudinary Streaming:</strong> Zero bloated base64 database entries. Images are streamed
-                    directly to a globally distributed CDN.</li>
-                <li><strong>Real MongoDB Atlas:</strong> Robust cloud database schema with Mongoose models, completely
-                    ditching mock JSON files.</li>
-                <li><strong>JWT & Bcrypt Security:</strong> Enterprise-grade authentication and password hashing
-                    securing the Official portal.</li>
-                <li><strong>Custom Indian-Civic Design:</strong> Saffron/Amber color theory, glassmorphism, and complex
-                    Framer Motion transitions.</li>
+                <li><strong>Next.js 16 + MongoDB Atlas</strong> Full App Router deployment replacing mock JSON servers
+                    with real Mongoose Schemas.</li>
+                <li><strong>Gemini 1.5 Vision AI Integration</strong> Analyzes uploaded images directly, deduces
+                    severity, and automatically drafts titles & descriptions.</li>
+                <li><strong>Interactive React-Leaflet Maps</strong> Integrating real interactive mapping components to
+                    visualize reported issues dynamically.</li>
+                <li><strong>Live Geolocation HTML5 API</strong> Triggers browser GPS to grab exact latitude/longitude
+                    coordinates during complaint submission.</li>
+                <li><strong>Cloudinary Image CDN API</strong> Streams photo uploads securely off-server to Cloudinary,
+                    ensuring zero database bloat.</li>
+                <li><strong>JWT & Bcrypt Security</strong> True stateless JSON Web Token Authentication to secure
+                    Official routes, preventing unauthorized access.</li>
+                <li><strong>Recharts Data Visualization</strong> Uses charting libraries inside the official portal to
+                    graphically represent SLA metadata and pending complaints.</li>
+                <li><strong>Custom Saffron Theme & Framer Motion</strong> An award-winning Indian Civic UI aesthetic
+                    avoiding generic layouts, featuring ultra-smooth micro-animations.</li>
             </ul>
         </div>
 
         <!-- Section 1 -->
         <div class="step">
             <div class="step-head">
-                <div class="step-num"><span class="n">Part 1:</span> Introduction & Technology Scale</div>
+                <div class="step-num"><span class="n">Step 1:</span> Hook & Tech Architecture Introduction</div>
             </div>
-            <div class="action">🎬 ACTION: Start on Landing Page. Scroll slightly to show the animated UI elements.
-            </div>
+            <div class="action">🎬 ACTION: Hover over the hero title elements on the Home Page to trigger Framer Motion
+                animations.</div>
             <div class="narration">
-                "Hello everyone, my name is Rajeev Ranjan Kumar. Welcome to <strong>CivicTracker AI</strong>. For my
-                Vibe-A-Thon
-                2026 project, I wanted to build a Panchayat and Ward Civic Issue Tracker that felt truly
-                next-generation.
+                "Hello, my name is Rajeev Ranjan Kumar, and this is <em>CivicTracker AI</em>. For my 2026 Vibe-A-Thon
+                submission, I decided a basic reporting form wasn't enough.
                 <br><br>
-                Instead of building a simple frontend form, I engineered a <strong>complete ecosystem on the
-                    bleeding-edge Next.js 16 App Router</strong>, fully integrated with a production <strong>MongoDB
-                    Atlas</strong> database. But the crown jewel of this platform is our deep integration with
-                <strong>Gemini Vision AI</strong> which completely eliminates manual data entry for the citizen."
+                Instead, I engineered an entire <strong>Next.js 16</strong> platform fully connected to a production
+                <strong>MongoDB Atlas</strong> database. I specifically designed a premium 'Saffron and Amber' UI
+                leveraging <strong>Framer Motion</strong> for dynamic glassmorphism, completely upgrading the
+                traditional citizen-government portal experience."
             </div>
         </div>
 
         <!-- Section 2 -->
         <div class="step">
             <div class="step-head">
-                <div class="step-num"><span class="n">Part 2:</span> AI Vision & Citizen Reporting</div>
+                <div class="step-num"><span class="n">Step 2:</span> Gemini Vision Auto-Fill & Maps Integration</div>
             </div>
-            <div class="action">🎬 ACTION: Click 'Submit Complaint'. Upload a photo (e.g., a pothole or garbage). Point
-                out the Geo-Coordinates auto-filling. Let the AI generate the text. Click Submit.</div>
+            <div class="action">🎬 ACTION: Click 'Submit Complaint'. Upload a photo. Let the AI generate Title/Desc.
+                Click the Map button so it fetches coordinates. Scroll down to show the React-Leaflet map.</div>
             <div class="narration">
-                "Let's see the AI in action. A citizen encounters a severe issue, like a massive pothole in Ward 12.
+                "Here is where our application becomes truly next-generation. As a citizen, I don’t need to type out
+                long descriptions. I simply select a photo of a broken pipeline or pothole.
                 <br><br>
-                Here is where we completely surpass MVP requirements: instead of asking the user to type out long
-                descriptions, they simply <strong>upload a photo</strong>. We instantly stream that image to
-                <strong>Cloudinary's CDN</strong>. Simultaneously, our <strong>Gemini AI Vision</strong> analyzes the
-                image pixels, understands the context, and automatically generates a highly detailed, professional
-                complaint title and description!
+                Instantly, we stream this image to our <strong>Cloudinary CDN</strong>. At the exact same time, we feed
+                the image into <strong>Gemini Vision AI</strong>. The AI analyzes the pixel data, writes a detailed
+                complaint description for us, and evaluates the severity logic!
                 <br><br>
-                Coupled with native <strong>HTML5 Browser Geolocation</strong> grabbing the exact GPS coordinates, a
-                citizen can file a world-class report in literally two clicks. Once submitted, they receive an
-                encrypted, unique Tracking ID."
+                Next, instead of manual address entry, our app uses the <strong>Native HTML5 Geolocation API</strong> to
+                securely grab my exact coordinates and plots them directly onto our integrated <strong>Interactive
+                    React-Leaflet Map</strong>! Two clicks, and I submit."
             </div>
-            <div class="tip">🎤 Tip: Make sure to pause and let the judges see the AI text populate in the form fields!
-            </div>
+            <div class="tip">🎤 Tip: Pause your narration while the AI types out the data in the form fields. Point at
+                the map with your cursor!</div>
         </div>
 
         <!-- Section 3 -->
         <div class="step">
             <div class="step-head">
-                <div class="step-num"><span class="n">Part 3:</span> Radical Transparency (Timeline)</div>
+                <div class="step-num"><span class="n">Step 3:</span> Unique Tracking & Transparency</div>
             </div>
-            <div class="action">🎬 ACTION: Switch to the 'Track Status' tab. Paste the Tracking ID and pull up the
-                complaint lifecycle.</div>
+            <div class="action">🎬 ACTION: Switch to the 'Track Status' page. Paste the Unique Tracking ID and search.
+            </div>
             <div class="narration">
-                "For a civic app, transparency is everything. A citizen does not need to create an account or call a
-                municipal helpline. They simply paste their Tracking ID, and the Next.js server dynamically retrieves
-                their specific <strong>Complaint Lifecycle Timeline</strong>.
-                <br><br>
-                Currently, it's marked as Open, providing total visibility into the bureaucratic process."
+                "Upon submission, the citizen is issued a secure Tracking ID. Rather than forcing them to download apps
+                or call helplines, they can simply drop this ID into our tracking engine. The server dynamically fetches
+                the MongoDB record to generate a real-time, transparent <strong>Complaint Lifecycle Timeline</strong>,
+                letting them track the ward's exact progress."
             </div>
         </div>
 
         <!-- Section 4 -->
         <div class="step">
             <div class="step-head">
-                <div class="step-num"><span class="n">Part 4:</span> Secure Official Portal Auth</div>
+                <div class="step-num"><span class="n">Step 4:</span> Real Security (JWT/Bcrypt)</div>
             </div>
-            <div class="action">🎬 ACTION: Navigate to the 'Official Portal'. Demonstrate the secure login using the
-                demo credentials.</div>
+            <div class="action">🎬 ACTION: Click 'Official Portal' and log in using demo credentials. Point out the
+                token-based auth process.</div>
             <div class="narration">
-                "Now, we cross over to the Official's perspective.
+                "So how do the officials handle these tickets? Let's log in.
                 <br><br>
-                I did not use mock simulated roles for this. This application features <strong>enterprise-grade
-                    security</strong>. The portal is protected by stateless <strong>JSON Web Tokens (JWT) and
-                    Bcrypt</strong> password hashing. Only verified municipal officers and admins can access the backend
-                dashboard."
+                Unlike standard hackathons that use fake 'role buttons', I implemented a true <strong>Enterprise
+                    Security Layer</strong>. All officer routes are entirely locked down using <strong>JSON Web Tokens
+                    (JWT) and Bcrypt</strong> password hashing, ensuring that sensitive citizen data remains fully
+                secured within the state."
             </div>
         </div>
 
         <!-- Section 5 -->
         <div class="step">
             <div class="step-head">
-                <div class="step-num"><span class="n">Part 5:</span> Dashboard & AI-Driven SLAs</div>
+                <div class="step-num"><span class="n">Step 5:</span> Dashboard Visualizations (Recharts) & SLA
+                    Management</div>
             </div>
-            <div class="action">🎬 ACTION: Show the analytics top cards. Find the issue in the data table. Highlight the
-                SLA timer counting down. Change status to 'In Progress'.</div>
+            <div class="action">🎬 ACTION: Show the analytics top cards, mentioning Recharts. Find the recent issue.
+                Check the dynamic SLA timer. Change status.</div>
             <div class="narration">
-                "Welcome to the Command Center. Officers are greeted with real-time analytics aggregated directly from
-                MongoDB.
+                "Welcome to the Officer Dashboard. Data is visualized dynamically using <strong>Recharts</strong>,
+                providing real-time aggregates on pending verses resolved cases.
                 <br><br>
-                Here is the complaint we just submitted. Notice the <strong>Dynamic SLA Timer</strong> counting down?
-                When the AI analyzed the image earlier, it didn't just write text—it evaluated the <strong>Severity and
-                    Urgency</strong> of the issue to strictly assign realistic legal SLAs.
-                <br><br>
-                As an officer, I can review the location, assign field staff, and instantly update the status to 'In
-                Progress'. That status propagates instantly, updating the citizen's tracking timeline in real-time."
+                In the data table, we see the complaint we just submitted. You'll notice the <strong>Dynamic SLA
+                    Timer</strong> counting down automatically based on the severity the Gemini AI assigned. As a
+                municipal officer, I can assign field staff and immediately update the ticket status to 'In Progress' or
+                'Resolved'. This instantaneously pushes updates to the citizen's tracking page."
             </div>
         </div>
 
         <!-- Section 6 -->
         <div class="step">
             <div class="step-head">
-                <div class="step-num"><span class="n">Part 6:</span> Conclusion</div>
+                <div class="step-num"><span class="n">Step 6:</span> High-Impact Conclusion</div>
             </div>
-            <div class="action">🎬 ACTION: Return to the beautiful homepage. Hover over the cards to show the Framer
-                Motion glassmorphic effects.</div>
+            <div class="action">🎬 ACTION: Click back to the Landing Page.</div>
             <div class="narration">
-                "In just 14 hours, using a 100% AI-assisted continuous development workflow, CivicTracker went from an
-                idea to a highly secure, fully scalable civic ecosystem.
+                "To summarize: In just 14 hours using entirely AI-assisted pair-programming, I successfully built and
+                deployed a Next.js 16 full-stack structure.
                 <br><br>
-                With <strong>Next.js 16, Gemini AI Vision, Cloudinary, Geolocation, JWT Authentication, and a
-                    custom-built Premium Indian Civic UI</strong>, this platform is ready for the real world.
+                We integrated <strong>Gemini Vision AI, Cloudinary streaming, mapping with React-Leaflet, Geolocation
+                    APIs, custom Recharts analytics, and JWT Security</strong> all encapsulated inside an award-winning
+                UI design.
                 <br><br>
-                Thank you so much for reviewing my Vibe-A-Thon 2026 project. Let's build a smarter future together."
+                This is CivicTracker AI — bringing ultimate automation and accountability to local governance. Thank you
+                for your time!"
             </div>
         </div>
 
