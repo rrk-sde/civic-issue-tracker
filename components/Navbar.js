@@ -9,10 +9,25 @@ export default function Navbar() {
     const path = usePathname();
     const router = useRouter();
     const [user, setUser] = useState(null);
+    const [score, setScore] = useState(null);
 
     useEffect(() => {
         const stored = localStorage.getItem('civic_user');
-        if (stored) setUser(JSON.parse(stored));
+        if (stored) {
+            const parsedUser = JSON.parse(stored);
+            setUser(parsedUser);
+
+            // Real Civic Karma logic: fetch 50 pts per submitted complaint
+            if (parsedUser.role === 'Citizen') {
+                fetch(`/api/complaints/score?name=${encodeURIComponent(parsedUser.name)}`)
+                    .then(r => r.json())
+                    .then(data => setScore(data.score))
+                    .catch(() => setScore(0));
+            }
+        } else {
+            setUser(null);
+            setScore(null);
+        }
     }, [path]); // re-read on route change
 
     const logout = () => {
@@ -57,7 +72,7 @@ export default function Navbar() {
                                     {user.role === 'Citizen' && (
                                         <div style={{ display: 'flex', alignItems: 'center', gap: 4, background: 'rgba(245,158,11,0.1)', padding: '2px 6px', borderRadius: 4, border: '1px solid rgba(245,158,11,0.2)' }} title="Civic Contribution Score">
                                             <span style={{ fontSize: 10 }}>🏆</span>
-                                            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--amber)', fontWeight: 700 }}>{user.score || ((user.name?.length || 5) * 45)} pts</span>
+                                            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--amber)', fontWeight: 700 }}>{score !== null ? score : '...'} pts</span>
                                         </div>
                                     )}
                                 </div>
