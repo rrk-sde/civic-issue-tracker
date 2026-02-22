@@ -75,10 +75,10 @@ export default function LoginPage() {
     };
 
     return (
-        <div style={{ minHeight: '100vh', display: 'flex', position: 'relative', overflow: 'hidden' }}>
+        <div className="login-container" style={{ minHeight: '100vh', display: 'flex', position: 'relative', overflow: 'hidden' }}>
 
             {/* ======== LEFT PANEL ======== */}
-            <div style={{ flex: '0 0 55%', padding: '48px 56px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative', zIndex: 1, borderRight: '1px solid var(--border-0)' }}>
+            <div className="left-panel" style={{ flex: '0 0 55%', padding: '48px 56px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative', zIndex: 1, borderRight: '1px solid var(--border-0)' }}>
 
                 {/* Subtle glow */}
                 <div style={{ position: 'absolute', top: '20%', left: '-10%', width: 500, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(245,158,11,0.05), transparent 70%)', pointerEvents: 'none', zIndex: 0 }} />
@@ -156,7 +156,7 @@ export default function LoginPage() {
             </div>
 
             {/* ======== RIGHT PANEL — Login Form ======== */}
-            <div style={{ flex: '0 0 45%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '48px 52px', position: 'relative', zIndex: 1 }}>
+            <div className="right-panel" style={{ flex: '0 0 45%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '48px 52px', position: 'relative', zIndex: 1 }}>
                 <div style={{ width: '100%', maxWidth: 380 }}>
 
                     <div style={{ marginBottom: 32 }}>
@@ -229,7 +229,14 @@ export default function LoginPage() {
                 </div>
             </div>
 
-            <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+            <style>{`
+                @keyframes spin { to { transform: rotate(360deg); } }
+                @media (max-width: 900px) {
+                    .login-container { flex-direction: column !important; }
+                    .left-panel { display: none !important; }
+                    .right-panel { flex: 1 !important; padding: 32px 24px !important; }
+                }
+            `}</style>
         </div>
     );
 }
